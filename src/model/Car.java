@@ -3,18 +3,28 @@ package model;
 import java.util.Objects;
 
 public abstract class Car {
+    private String registrationNumber;
     private String brand;
     private String model;
     private int seats;
     private boolean airConditioning;
     private String transmission;
 
-    Car(String brand, String model, int seats, boolean airConditioning, String transmission) {
+    Car(String registrationNumber, String brand, String model, int seats, boolean airConditioning, String transmission) {
+        this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
         this.seats = seats;
         this.airConditioning = airConditioning;
         this.transmission = transmission;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 
     public String getBrand() {
