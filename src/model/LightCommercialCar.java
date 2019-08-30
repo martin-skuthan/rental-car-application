@@ -81,7 +81,6 @@ public class LightCommercialCar extends Car {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(super.hashCode(), payload, loadVolume, loadHeight, loadWidth, loadLength);
     }
 }
