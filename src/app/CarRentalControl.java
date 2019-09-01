@@ -2,17 +2,20 @@ package app;
 
 import exceptions.NoSuchOptionException;
 import exceptions.NoSuchTypeException;
+import io.ConsolePrinter;
 import io.DataReader;
 import model.Car;
 import model.CarRental;
 import model.LightCommercialCar;
 import model.PassengerCar;
 
+import java.util.Collection;
 import java.util.InputMismatchException;
 
 public class CarRentalControl {
     private DataReader dataReader = new DataReader();
     private CarRental carRental = new CarRental();
+    private ConsolePrinter consolePrinter = new ConsolePrinter();
 
     public void controlLoop() {
         Options option = null;
@@ -87,11 +90,13 @@ public class CarRentalControl {
     }
 
     private void printPassengerCars() {
-        carRental.printPassengerCars();
+        Collection<Car> cars = carRental.getCars().values();
+        consolePrinter.printPassengerCars(cars);
     }
 
     private void printLightCommercialCars() {
-        carRental.printLightCommercialCars();
+        Collection<Car> cars = carRental.getCars().values();
+        consolePrinter.printLightCommercialCars(cars);
     }
 
     private void close() {

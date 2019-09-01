@@ -36,32 +36,4 @@ public class CarRental {
             return true;
         }
     }
-
-    public void printPassengerCars() {
-        int counter = 0;
-        for (Car car : cars.values()) {
-            if (car instanceof PassengerCar) {
-                System.out.println(car);
-                counter++;
-            }
-        }
-
-        if (counter == 0) {
-            System.out.println("There is no passenger cars in car rental.");
-        }
-    }
-
-    public void printLightCommercialCars() {
-        int counter = 0;
-        for (Car car : cars.values()) {
-            if (car instanceof LightCommercialCar) {
-                System.out.println(car);
-                counter++;
-            }
-        }
-
-        if (counter == 0) {
-            System.out.println("There is no ligt commercial cars in car rental");
-        }
-    }
 }
