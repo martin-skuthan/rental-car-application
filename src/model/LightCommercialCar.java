@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.Transmission;
+
 import java.util.Objects;
 
 public class LightCommercialCar extends Car {
@@ -10,7 +12,7 @@ public class LightCommercialCar extends Car {
     private double loadLength;
 
     public LightCommercialCar(String registrationNumber, String brand, String model, int seats, boolean airConditioning,
-                              String transmission, double payLoad, double loadVolume, double loadHeight, double loadWidth,
+                              Transmission transmission, double payLoad, double loadVolume, double loadHeight, double loadWidth,
                               double loadLength) {
         super(registrationNumber, brand , model, seats, airConditioning, transmission);
         this.payload = payLoad;

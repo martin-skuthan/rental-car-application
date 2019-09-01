@@ -1,14 +1,17 @@
 package model;
 
+import model.enums.Transmission;
+import model.enums.TypeOfDrive;
+
 import java.util.Objects;
 
 public class PassengerCar extends Car {
     private int numberOfDoors;
-    private String typeOfDrive;
+    private TypeOfDrive typeOfDrive;
     private int trunkCapacity;
 
     public PassengerCar(String registrationNumber, String brand, String model, int seats, boolean airConditioning,
-                        String transmission, int numberOfDoors, String typeOfDrive, int trunkCapacity) {
+                        Transmission transmission, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
         super(registrationNumber, brand, model, seats, airConditioning, transmission);
         this.typeOfDrive = typeOfDrive;
         this.trunkCapacity = trunkCapacity;
@@ -22,11 +25,11 @@ public class PassengerCar extends Car {
         this.numberOfDoors = numberOfDoors;
     }
 
-    public String getTypeOfDrive() {
+    public TypeOfDrive getTypeOfDrive() {
         return typeOfDrive;
     }
 
-    public void setTypeOfDrive(String typeOfDrive) {
+    public void setTypeOfDrive(TypeOfDrive typeOfDrive) {
         this.typeOfDrive = typeOfDrive;
     }
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.Transmission;
+
 import java.util.Objects;
 
 public abstract class Car {
@@ -8,9 +10,9 @@ public abstract class Car {
     private String model;
     private int seats;
     private boolean airConditioning;
-    private String transmission;
+    private Transmission transmission;
 
-    Car(String registrationNumber, String brand, String model, int seats, boolean airConditioning, String transmission) {
+    Car(String registrationNumber, String brand, String model, int seats, boolean airConditioning, Transmission transmission) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
@@ -59,11 +61,11 @@ public abstract class Car {
         this.airConditioning = airConditioning;
     }
 
-    public String getTransmission() {
+    public Transmission getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(String transmission) {
+    public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
 
