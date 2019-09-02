@@ -7,7 +7,8 @@ public enum Options {
     ADD_PASSENGER_CAR("Add passenger car"),
     ADD_LIGHT_COMMERCIAL_CAR("Add light commercial car"),
     PRINT_PASSENGER_CARS("Print passenger cars"),
-    PRINT_LIGHT_COMMERCIAL_CARS("Print light commercial cars");
+    PRINT_LIGHT_COMMERCIAL_CARS("Print light commercial cars"),
+    REMOVE_CAR("Remove car");
 
     String description;
 

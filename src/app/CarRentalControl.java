@@ -64,6 +64,9 @@ public class CarRentalControl {
             case PRINT_LIGHT_COMMERCIAL_CARS:
                 printLightCommercialCars();
                 break;
+            case REMOVE_CAR:
+                removeCar();
+                break;
         }
     }
 
@@ -112,6 +115,15 @@ public class CarRentalControl {
     private void printLightCommercialCars() {
         Collection<Car> cars = carRental.getCars().values();
         consolePrinter.printLightCommercialCars(cars);
+    }
+
+    private void removeCar() {
+        String registrationNumber = dataReader.getRegistrationNumber();
+        if (carRental.removeCar(registrationNumber)) {
+            System.out.println("The car with registration number: " + registrationNumber + " was removed");
+        }else {
+            System.out.println("There is no car with registration number: " + registrationNumber);
+        }
     }
 
     private void close() {

@@ -30,6 +30,11 @@ public class DataReader {
         }
     }
 
+    public String getRegistrationNumber() {
+        System.out.println("Enter registration number of the car you want to remove: ");
+        return scanner.nextLine();
+    }
+
     public void close() {
         scanner.close();
     }
@@ -88,4 +93,5 @@ public class DataReader {
         return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission , payload,
                                       loadVolume, loadHeight, loadWidth, loadLegth);
     }
+
 }

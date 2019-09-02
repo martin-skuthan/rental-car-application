@@ -73,7 +73,7 @@ public abstract class Car {
 
     @Override
     public String toString() {
-        return brand + ", " + model + ", " + seats + ", " + airConditioning + ", " + transmission;
+        return registrationNumber + ", " + brand + ", " + model + ", " + seats + ", " + airConditioning + ", " + transmission;
     }
 
     @Override
