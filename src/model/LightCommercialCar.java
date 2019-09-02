@@ -5,6 +5,8 @@ import model.enums.Transmission;
 import java.util.Objects;
 
 public class LightCommercialCar extends Car {
+    public static final String TYPE_OF_CAR = "LightCommercial";
+
     private double payload;
     private double loadVolume;
     private double loadHeight;
@@ -60,6 +62,22 @@ public class LightCommercialCar extends Car {
 
     public void setLoadLength(double loadLength) {
         this.loadLength = loadLength;
+    }
+
+    @Override
+    public String convertToCsv() {
+        return  TYPE_OF_CAR + ";" +
+                getRegistrationNumber() + ";" +
+                getBrand() + ";" +
+                getModel() + ";" +
+                getSeats() + ";" +
+                isAirConditioning() + ";" +
+                getTransmission() + ";" +
+                getPayload() + ";" +
+                getLoadVolume() + ";" +
+                getLoadHeight() + ";" +
+                getLoadWidth() + ";" +
+                getLoadLength();
     }
 
     @Override

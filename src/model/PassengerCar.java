@@ -6,6 +6,8 @@ import model.enums.TypeOfDrive;
 import java.util.Objects;
 
 public class PassengerCar extends Car {
+    public static final String TYPE_OF_CAR = "Passenger";
+
     private int numberOfDoors;
     private TypeOfDrive typeOfDrive;
     private int trunkCapacity;
@@ -39,6 +41,20 @@ public class PassengerCar extends Car {
 
     public void setTrunkCapacity(int trunkCapacity) {
         this.trunkCapacity = trunkCapacity;
+    }
+
+    @Override
+    public String convertToCsv() {
+        return  TYPE_OF_CAR + ";" +
+                getRegistrationNumber() + ";" +
+                getBrand() + ";" +
+                getModel() + ";" +
+                getSeats() + ";" +
+                isAirConditioning() + ";" +
+                getTransmission() + ";" +
+                getNumberOfDoors() + ";" +
+                getTypeOfDrive() + ";" +
+                trunkCapacity;
     }
 
     @Override

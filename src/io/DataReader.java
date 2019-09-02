@@ -49,14 +49,14 @@ public class DataReader {
         String transmissionDesc = scanner.nextLine();
         Transmission transmission = Transmission.getFromDescription(transmissionDesc);
         System.out.println("Number of doors: ");
-        int doors = getInt();
+        int numberOfDoors = getInt();
         System.out.println("Type of drive(petrol/diesel/hybrid): ");
         String typeOfDriveDesc = scanner.nextLine();
         TypeOfDrive typeOfDrive = TypeOfDrive.getFromDescription(typeOfDriveDesc);
         System.out.println("Trunk capacity(in suitcases): ");
         int trunkCapacity = getInt();
 
-        return new PassengerCar(registrationNumber,brand, model, seats, airConditioning, transmission, doors,
+        return new PassengerCar(registrationNumber,brand, model, seats, airConditioning, transmission, numberOfDoors,
                                 typeOfDrive, trunkCapacity);
     }
 

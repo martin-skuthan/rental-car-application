@@ -1,9 +1,12 @@
 package app;
 
+import exceptions.ExportDataException;
+import exceptions.ImportDataException;
 import exceptions.NoSuchOptionException;
 import exceptions.NoSuchTypeException;
 import io.ConsolePrinter;
 import io.DataReader;
+import io.file.CsvFileManager;
 import model.Car;
 import model.CarRental;
 import model.LightCommercialCar;
@@ -13,9 +16,21 @@ import java.util.Collection;
 import java.util.InputMismatchException;
 
 public class CarRentalControl {
+    private CarRental carRental;
     private DataReader dataReader = new DataReader();
-    private CarRental carRental = new CarRental();
     private ConsolePrinter consolePrinter = new ConsolePrinter();
+    private CsvFileManager csvFileManager = new CsvFileManager();
+
+    public CarRentalControl() {
+        try {
+            carRental = csvFileManager.importData();
+            System.out.println("Import from file succeeded");
+        }catch (ImportDataException ex) {
+            System.out.println(ex.getMessage());
+            carRental = new CarRental();
+            System.out.println("New Car Rental was created.");
+        }
+    }
 
     public void controlLoop() {
         Options option = null;
@@ -100,6 +115,12 @@ public class CarRentalControl {
     }
 
     private void close() {
-        System.out.println("Bye bye");
+        try {
+            csvFileManager.exportData(carRental);
+            System.out.println("Export to file succeeded");
+        }catch (ExportDataException ex) {
+            System.out.println(ex.getMessage());
+        }
+        dataReader.close();
     }
 }

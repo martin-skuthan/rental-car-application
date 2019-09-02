@@ -69,6 +69,8 @@ public abstract class Car {
         this.transmission = transmission;
     }
 
+    public abstract String convertToCsv();
+
     @Override
     public String toString() {
         return brand + ", " + model + ", " + seats + ", " + airConditioning + ", " + transmission;
