@@ -26,7 +26,7 @@ public class CsvFileManager {
                 bufferedWriter.write(car.convertToCsv());
                 bufferedWriter.newLine();
             }
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             throw  new ExportDataException("Problem with export data to: " + FILE_NAME);
         }
     }

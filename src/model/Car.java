@@ -2,9 +2,10 @@ package model;
 
 import model.enums.Transmission;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Car {
+public abstract class Car implements Serializable {
     private String registrationNumber;
     private String brand;
     private String model;

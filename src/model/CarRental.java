@@ -2,10 +2,11 @@ package model;
 
 import exceptions.CarAlreadyExistsException;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CarRental {
+public class CarRental implements Serializable{
     private Map<String, Car> cars = new HashMap<>();
 
     public Map<String, Car> getCars() {
