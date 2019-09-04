@@ -4,8 +4,11 @@ import model.Car;
 import model.LightCommercialCar;
 import model.PassengerCar;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class ConsolePrinter {
 

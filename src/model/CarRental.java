@@ -3,13 +3,18 @@ package model;
 import exceptions.CarAlreadyExistsException;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CarRental implements Serializable{
     private Map<String, Car> cars = new HashMap<>();
 
     public Map<String, Car> getCars() {
+        return cars;
+    }
+
+    public Collection<Car> getSortedCars(Comparator<Car> comparator) {
+        ArrayList<Car> cars = new ArrayList<>(getCars().values());
+        cars.sort(comparator);
         return cars;
     }
 

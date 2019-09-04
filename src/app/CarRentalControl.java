@@ -14,6 +14,7 @@ import model.Car;
 import model.CarRental;
 import model.LightCommercialCar;
 import model.PassengerCar;
+import model.comparator.BrandComparator;
 
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -112,12 +113,12 @@ public class CarRentalControl {
     }
 
     private void printPassengerCars() {
-        Collection<Car> cars = carRental.getCars().values();
+        Collection<Car> cars = carRental.getSortedCars(new BrandComparator());
         consolePrinter.printPassengerCars(cars);
     }
 
     private void printLightCommercialCars() {
-        Collection<Car> cars = carRental.getCars().values();
+        Collection<Car> cars = carRental.getSortedCars(new BrandComparator());
         consolePrinter.printLightCommercialCars(cars);
     }
 
