@@ -7,6 +7,8 @@ import exceptions.NoSuchTypeException;
 import io.ConsolePrinter;
 import io.DataReader;
 import io.file.CsvFileManager;
+import io.file.FileManager;
+import io.file.FileManagerFactory;
 import io.file.SerializableFileManager;
 import model.Car;
 import model.CarRental;
@@ -20,13 +22,12 @@ public class CarRentalControl {
     private CarRental carRental;
     private DataReader dataReader = new DataReader();
     private ConsolePrinter consolePrinter = new ConsolePrinter();
-    private CsvFileManager csvFileManager = new CsvFileManager();
-    private SerializableFileManager serializableFileManager = new SerializableFileManager();
+    private FileManager fileManager;
 
     public CarRentalControl() {
+        fileManager = new FileManagerFactory(dataReader).buildFileManager();
         try {
-            //carRental = csvFileManager.importData();
-            carRental = serializableFileManager.importData();
+            carRental = fileManager.importData();
             System.out.println("Import from file succeeded");
         }catch (ImportDataException ex) {
             System.out.println(ex.getMessage());
@@ -130,17 +131,8 @@ public class CarRentalControl {
     }
 
     private void close() {
-        /*
         try {
-            csvFileManager.exportData(carRental);
-            System.out.println("Export to file succeeded");
-        }catch (ExportDataException ex) {
-            System.out.println(ex.getMessage());
-        }
-        dataReader.close();
-        */
-        try {
-            serializableFileManager.exportData(carRental);
+            fileManager.exportData(carRental);
             System.out.println("Export to file succeeded");
         }catch (ExportDataException ex) {
             System.out.println(ex.getMessage());

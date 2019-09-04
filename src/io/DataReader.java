@@ -22,6 +22,10 @@ public class DataReader {
         }
     }
 
+    public String getString() {
+        return scanner.nextLine();
+    }
+
     public boolean getBoolean() {
         try {
             return scanner.nextBoolean();

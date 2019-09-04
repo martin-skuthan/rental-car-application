@@ -13,7 +13,7 @@ import model.enums.TypeOfDrive;
 import java.io.*;
 import java.util.Collection;
 
-public class CsvFileManager {
+public class CsvFileManager implements FileManager {
     private static final String FILE_NAME = "CarRental.csv";
 
     public void exportData(CarRental carRental){

@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Collection;
 import java.util.Map;
 
-public class SerializableFileManager {
+public class SerializableFileManager implements FileManager {
     private static final String FILE_NAME = "CarRental.obj";
 
     public void exportData(CarRental carRental) {
