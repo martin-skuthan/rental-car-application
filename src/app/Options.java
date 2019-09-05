@@ -6,9 +6,11 @@ public enum Options {
     EXIT("Exit"),
     ADD_PASSENGER_CAR("Add passenger car"),
     ADD_LIGHT_COMMERCIAL_CAR("Add light commercial car"),
+    REMOVE_CAR("Remove car"),
     PRINT_PASSENGER_CARS("Print passenger cars"),
     PRINT_LIGHT_COMMERCIAL_CARS("Print light commercial cars"),
-    REMOVE_CAR("Remove car");
+    ADD_USER("Add user"),
+    PRINT_USERS("Print users");
 
     String description;
 

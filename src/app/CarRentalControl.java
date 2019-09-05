@@ -1,19 +1,13 @@
 package app;
 
-import exceptions.ExportDataException;
-import exceptions.ImportDataException;
-import exceptions.NoSuchOptionException;
-import exceptions.NoSuchTypeException;
+import exceptions.*;
 import io.ConsolePrinter;
 import io.DataReader;
 import io.file.CsvFileManager;
 import io.file.FileManager;
 import io.file.FileManagerFactory;
 import io.file.SerializableFileManager;
-import model.Car;
-import model.CarRental;
-import model.LightCommercialCar;
-import model.PassengerCar;
+import model.*;
 import model.comparator.BrandComparator;
 
 import java.util.Collection;
@@ -63,14 +57,20 @@ public class CarRentalControl {
             case ADD_LIGHT_COMMERCIAL_CAR:
                 addLightCommercialCar();
                 break;
+            case REMOVE_CAR:
+                removeCar();
+                break;
             case PRINT_PASSENGER_CARS:
                 printPassengerCars();
                 break;
             case PRINT_LIGHT_COMMERCIAL_CARS:
                 printLightCommercialCars();
                 break;
-            case REMOVE_CAR:
-                removeCar();
+            case ADD_USER:
+                addUser();
+                break;
+            case PRINT_USERS:
+                printUsers();
                 break;
         }
     }
@@ -94,7 +94,7 @@ public class CarRentalControl {
         try {
             PassengerCar passengerCar = dataReader.readAndCreatePassengerCar();
             carRental.addCar(passengerCar);
-        }catch (NoSuchTypeException ex) {
+        }catch (NoSuchTypeException | CarAlreadyExistsException ex) {
             System.out.println(ex.getMessage());
         }catch (InputMismatchException ex) {
             System.out.println("Provided value isn't in correct format");
@@ -105,7 +105,7 @@ public class CarRentalControl {
         try {
             LightCommercialCar lightCommercialCar = dataReader.readAndCreateLightCommercialCar();
             carRental.addCar(lightCommercialCar);
-        }catch (NoSuchTypeException ex) {
+        }catch (NoSuchTypeException | CarAlreadyExistsException ex) {
             System.out.println(ex.getMessage());
         }catch (InputMismatchException ex) {
             System.out.println("Provided value isn't in correct format");
@@ -129,6 +129,16 @@ public class CarRentalControl {
         }else {
             System.out.println("There is no car with registration number: " + registrationNumber);
         }
+    }
+
+    private void addUser() {
+        CarRentalUser carRentalUser = dataReader.readAndCreateCarRentalUser();
+        carRental.addCarRentalUser(carRentalUser);
+    }
+
+    private void printUsers() {
+        Collection<CarRentalUser> carRentalUsers = carRental.getCarRentalUsers().values();
+        consolePrinter.printCarRentalUsers(carRentalUsers);
     }
 
     private void close() {

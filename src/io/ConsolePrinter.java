@@ -1,6 +1,7 @@
 package io;
 
 import model.Car;
+import model.CarRentalUser;
 import model.LightCommercialCar;
 import model.PassengerCar;
 
@@ -37,6 +38,17 @@ public class ConsolePrinter {
 
         if (counter == 0) {
             System.out.println("There is no light commercial cars in car rental");
+        }
+    }
+
+    public void printCarRentalUsers(Collection<CarRentalUser> carRentalUsers) {
+        int counter = 0;
+        for (CarRentalUser user : carRentalUsers) {
+            System.out.println(user);
+        }
+
+        if (counter == 0) {
+            System.out.println("There is no users in car rental");
         }
     }
 }

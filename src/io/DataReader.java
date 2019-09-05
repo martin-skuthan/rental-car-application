@@ -1,5 +1,6 @@
 package io;
 
+import model.CarRentalUser;
 import model.LightCommercialCar;
 import model.PassengerCar;
 import model.enums.Transmission;
@@ -96,6 +97,18 @@ public class DataReader {
 
         return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission , payload,
                                       loadVolume, loadHeight, loadWidth, loadLegth);
+    }
+
+    public CarRentalUser readAndCreateCarRentalUser() {
+        String userID = "AAAA";
+        System.out.println("First name: ");
+        String firstName = scanner.nextLine();
+        System.out.println("Last name: ");
+        String lastName = scanner.nextLine();
+        System.out.println("Pesel: ");
+        String pesel = scanner.nextLine();
+
+        return new CarRentalUser(firstName, lastName, pesel);
     }
 
 }
