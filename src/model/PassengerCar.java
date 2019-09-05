@@ -15,6 +15,7 @@ public class PassengerCar extends Car {
     public PassengerCar(String registrationNumber, String brand, String model, int seats, boolean airConditioning,
                         Transmission transmission, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
         super(registrationNumber, brand, model, seats, airConditioning, transmission);
+        this.numberOfDoors = numberOfDoors;
         this.typeOfDrive = typeOfDrive;
         this.trunkCapacity = trunkCapacity;
     }
@@ -59,7 +60,10 @@ public class PassengerCar extends Car {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + numberOfDoors + ", " + typeOfDrive + ", " + trunkCapacity;
+        return  super.toString() + ", number of doors:" +
+                numberOfDoors + ", type of drive:" +
+                typeOfDrive + ", trunk capacity(in bages):" +
+                trunkCapacity;
     }
 
     @Override

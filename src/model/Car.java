@@ -74,7 +74,12 @@ public abstract class Car implements Serializable {
 
     @Override
     public String toString() {
-        return registrationNumber + ", " + brand + ", " + model + ", " + seats + ", " + airConditioning + ", " + transmission;
+        return  registrationNumber + ", " +
+                brand + " " +
+                model + ", seats:" +
+                seats + ", air conditioning:" +
+                airConditioning + ", transmission:" +
+                transmission;
     }
 
     @Override

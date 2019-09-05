@@ -36,7 +36,7 @@ public class ConsolePrinter {
         }
 
         if (counter == 0) {
-            System.out.println("There is no ligt commercial cars in car rental");
+            System.out.println("There is no light commercial cars in car rental");
         }
     }
 }
