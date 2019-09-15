@@ -45,6 +45,7 @@ public class ConsolePrinter {
         int counter = 0;
         for (CarRentalUser user : carRentalUsers) {
             System.out.println(user);
+            counter++;
         }
 
         if (counter == 0) {

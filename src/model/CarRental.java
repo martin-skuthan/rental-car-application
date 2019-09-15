@@ -50,6 +50,15 @@ public class CarRental implements Serializable{
         cars.put(car.getRegistrationNumber(), car);
     }
 
+    public boolean removeCar(String registrationNumber) {
+        if (!cars.containsKey(registrationNumber)) {
+            return false;
+        }else {
+            cars.remove(registrationNumber);
+            return true;
+        }
+    }
+
     public void addCarRentalUser(CarRentalUser carRentalUser) {
         if (carRentalUser.getPesel() == null) {
             throw new NullPointerException("Pesel cannot be null");
@@ -64,11 +73,11 @@ public class CarRental implements Serializable{
         carRentalUsers.put(carRentalUser.getPesel(), carRentalUser);
     }
 
-    public boolean removeCar(String registrationNumber) {
-        if (!cars.containsKey(registrationNumber)) {
+    public boolean removeCarRentalUser(String pesel) {
+        if (carRentalUsers.containsKey(pesel)) {
             return false;
         }else {
-            cars.remove(registrationNumber);
+            carRentalUsers.remove(pesel);
             return true;
         }
     }

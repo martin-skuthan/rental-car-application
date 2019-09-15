@@ -69,6 +69,9 @@ public class CarRentalControl {
             case ADD_USER:
                 addUser();
                 break;
+            case REMOVE_USER:
+                removeUser();
+                break;
             case PRINT_USERS:
                 printUsers();
                 break;
@@ -123,7 +126,8 @@ public class CarRentalControl {
     }
 
     private void removeCar() {
-        String registrationNumber = dataReader.getRegistrationNumber();
+        System.out.println("Enter registration number of the car you want remove to: ");
+        String registrationNumber = dataReader.getString();
         if (carRental.removeCar(registrationNumber)) {
             System.out.println("The car with registration number: " + registrationNumber + " was removed");
         }else {
@@ -134,6 +138,16 @@ public class CarRentalControl {
     private void addUser() {
         CarRentalUser carRentalUser = dataReader.readAndCreateCarRentalUser();
         carRental.addCarRentalUser(carRentalUser);
+    }
+
+    private void removeUser() {
+        System.out.println("Enter pesel of the user you want remove to: ");
+        String pesel = dataReader.getString();
+        if (!carRental.removeCarRentalUser(pesel)) {
+            System.out.println("User with pesel: " + pesel + " was removed");
+        }else {
+            System.out.println("There is no user with User ID: " + pesel);
+        }
     }
 
     private void printUsers() {

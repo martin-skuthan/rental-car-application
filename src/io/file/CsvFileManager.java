@@ -3,10 +3,7 @@ package io.file;
 import exceptions.ExportDataException;
 import exceptions.ImportDataException;
 import exceptions.InvalidDataException;
-import model.Car;
-import model.CarRental;
-import model.LightCommercialCar;
-import model.PassengerCar;
+import model.*;
 import model.enums.Transmission;
 import model.enums.TypeOfDrive;
 
@@ -14,39 +11,73 @@ import java.io.*;
 import java.util.Collection;
 
 public class CsvFileManager implements FileManager {
-    private static final String FILE_NAME = "CarRental.csv";
+    private static final String CARS_FILE_NAME = "CarRentalCars.csv";
+    private static final String USERS_FILE_NAME = "CarRentalUsers.csv";
 
-    public void exportData(CarRental carRental){
-        Collection<Car> cars = carRental.getCars().values();
-        try(
-                FileWriter fileWriter = new FileWriter(FILE_NAME);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                ) {
-            for (Car car : cars) {
-                bufferedWriter.write(car.convertToCsv());
-                bufferedWriter.newLine();
-            }
-        }catch (IOException ex) {
-            throw  new ExportDataException("Problem with export data to: " + FILE_NAME);
-        }
+    public void exportData(CarRental carRental) {
+        exportCars(carRental);
+        exportUsers(carRental);
     }
 
     public CarRental importData() {
         CarRental carRental = new CarRental();
+        importCars(carRental);
+        importUsers(carRental);
+        return carRental;
+    }
+
+    private void exportCars(CarRental carRental) {
+        Collection<Car> cars = carRental.getCars().values();
+        exportCollection(cars, CARS_FILE_NAME);
+    }
+
+    private void exportUsers(CarRental carRental) {
+        Collection<CarRentalUser> users = carRental.getCarRentalUsers().values();
+        exportCollection(users, USERS_FILE_NAME);
+    }
+
+    private <T extends CsvConvert> void  exportCollection(Collection<T> collection, String fileName) {
         try(
-                FileReader fileReader = new FileReader(FILE_NAME);
+                FileWriter fileWriter = new FileWriter(fileName);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                ) {
+            for (T element : collection) {
+                bufferedWriter.write(element.convertToCsv());
+                bufferedWriter.newLine();
+            }
+        }catch (IOException ex) {
+            throw new ExportDataException("Problem with export data to: " + fileName);
+        }
+    }
+
+    private void importCars(CarRental carRental) {
+       try(
+               FileReader fileReader = new FileReader(CARS_FILE_NAME);
+               BufferedReader bufferedReader = new BufferedReader(fileReader);
+               )  {
+           String line = null;
+           while ((line = bufferedReader.readLine()) != null) {
+               Car car = createCarFromString(line);
+               carRental.addCar(car);
+           }
+       }catch (IOException ex) {
+           throw new ImportDataException("Problem with import data from:" + CARS_FILE_NAME);
+       }
+    }
+
+    private void importUsers(CarRental carRental) {
+        try(
+                FileReader fileReader = new FileReader(USERS_FILE_NAME);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 ) {
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
-                Car car = createCarFromString(line);
-                carRental.addCar(car);
+                CarRentalUser carRentalUser = createCarRentalUser(line);
+                carRental.addCarRentalUser(carRentalUser);
             }
         }catch (IOException ex) {
-            throw new ImportDataException("Problem with import data from: " + FILE_NAME);
+            throw new ImportDataException("Problem with import data from:" + USERS_FILE_NAME);
         }
-
-        return carRental;
     }
 
     private Car createCarFromString(String line) {
@@ -91,6 +122,16 @@ public class CsvFileManager implements FileManager {
 
         return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, payLoad,
                                       loadVolume, loadHeight, loadWidth, loadLength);
+    }
+
+    private CarRentalUser createCarRentalUser(String line) {
+        String[] spltit = line.split(";");
+        String userId = spltit[0];
+        String firstName = spltit[1];
+        String lastName = spltit[2];
+        String pesel = spltit[3];
+
+        return new CarRentalUser(userId, firstName, lastName, pesel);
     }
 
 

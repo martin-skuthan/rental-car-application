@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class User {
+public abstract class User implements Serializable, CsvConvert {
     private String userId;
     private String firstName;
     private String lastName;
@@ -12,6 +13,11 @@ public abstract class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
+    }
+
+    public User(String userId, String firstName, String lastName, String pesel) {
+        this(firstName, lastName, pesel);
+        this.userId = userId;
     }
 
     public User(){}
@@ -51,6 +57,14 @@ public abstract class User {
     @Override
     public String toString() {
         return "User ID:" + userId + ", " + firstName + " " + lastName + ", pesel:" + pesel;
+    }
+
+    @Override
+    public String convertToCsv() {
+        return  userId + ";" +
+                firstName + ";" +
+                lastName + ";" +
+                pesel;
     }
 
     @Override

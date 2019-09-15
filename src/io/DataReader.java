@@ -35,11 +35,6 @@ public class DataReader {
         }
     }
 
-    public String getRegistrationNumber() {
-        System.out.println("Enter registration number of the car you want to remove: ");
-        return scanner.nextLine();
-    }
-
     public void close() {
         scanner.close();
     }
@@ -100,7 +95,6 @@ public class DataReader {
     }
 
     public CarRentalUser readAndCreateCarRentalUser() {
-        String userID = "AAAA";
         System.out.println("First name: ");
         String firstName = scanner.nextLine();
         System.out.println("Last name: ");

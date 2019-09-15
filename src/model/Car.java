@@ -5,7 +5,7 @@ import model.enums.Transmission;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Car implements Serializable {
+public abstract class Car implements Serializable, CsvConvert{
     private String registrationNumber;
     private String brand;
     private String model;
@@ -69,8 +69,6 @@ public abstract class Car implements Serializable {
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
-
-    public abstract String convertToCsv();
 
     @Override
     public String toString() {
