@@ -9,6 +9,7 @@ import io.file.FileManagerFactory;
 import io.file.SerializableFileManager;
 import model.*;
 import model.comparator.BrandComparator;
+import model.comparator.UserIdComparator;
 
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -136,14 +137,18 @@ public class CarRentalControl {
     }
 
     private void addUser() {
-        CarRentalUser carRentalUser = dataReader.readAndCreateCarRentalUser();
-        carRental.addCarRentalUser(carRentalUser);
+        try {
+            CarRentalUser carRentalUser = dataReader.readAndCreateCarRentalUser();
+            carRental.addCarRentalUser(carRentalUser);
+        }catch (UserAlreadyExistsException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     private void removeUser() {
         System.out.println("Enter pesel of the user you want remove to: ");
         String pesel = dataReader.getString();
-        if (!carRental.removeCarRentalUser(pesel)) {
+        if (carRental.removeCarRentalUser(pesel)) {
             System.out.println("User with pesel: " + pesel + " was removed");
         }else {
             System.out.println("There is no user with User ID: " + pesel);
@@ -151,7 +156,7 @@ public class CarRentalControl {
     }
 
     private void printUsers() {
-        Collection<CarRentalUser> carRentalUsers = carRental.getCarRentalUsers().values();
+        Collection<CarRentalUser> carRentalUsers = carRental.getSortedCarRentalUsers(new UserIdComparator());
         consolePrinter.printCarRentalUsers(carRentalUsers);
     }
 
