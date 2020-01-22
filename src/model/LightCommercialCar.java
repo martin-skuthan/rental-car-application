@@ -14,9 +14,9 @@ public class LightCommercialCar extends Car {
     private double loadLength;
 
     public LightCommercialCar(String registrationNumber, String brand, String model, int seats, boolean airConditioning,
-                              Transmission transmission, double payLoad, double loadVolume, double loadHeight, double loadWidth,
-                              double loadLength) {
-        super(registrationNumber, brand , model, seats, airConditioning, transmission);
+                              Transmission transmission, User user, double payLoad, double loadVolume, double loadHeight,
+                              double loadWidth, double loadLength) {
+        super(registrationNumber, brand , model, seats, airConditioning, transmission,user,TYPE_OF_CAR);
         this.payload = payLoad;
         this.loadVolume = loadVolume;
         this.loadHeight = loadHeight;

@@ -6,20 +6,26 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Car implements Serializable, CsvConvert{
+
     private String registrationNumber;
     private String brand;
     private String model;
     private int seats;
     private boolean airConditioning;
     private Transmission transmission;
+    private User user;
+    private String typeOfCar;
 
-    Car(String registrationNumber, String brand, String model, int seats, boolean airConditioning, Transmission transmission) {
+    Car(String registrationNumber, String brand, String model, int seats, boolean airConditioning, Transmission transmission,
+        User user, String typeOfCar) {
         this.registrationNumber = registrationNumber;
         this.brand = brand;
         this.model = model;
         this.seats = seats;
         this.airConditioning = airConditioning;
         this.transmission = transmission;
+        this.user = user;
+        this.typeOfCar = typeOfCar;
     }
 
     public String getRegistrationNumber() {
@@ -68,6 +74,22 @@ public abstract class Car implements Serializable, CsvConvert{
 
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getTypeOfCar() {
+        return typeOfCar;
+    }
+
+    public void setTypeOfCar(String typeOfCar) {
+        this.typeOfCar = typeOfCar;
     }
 
     @Override

@@ -13,8 +13,8 @@ public class PassengerCar extends Car {
     private int trunkCapacity;
 
     public PassengerCar(String registrationNumber, String brand, String model, int seats, boolean airConditioning,
-                        Transmission transmission, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
-        super(registrationNumber, brand, model, seats, airConditioning, transmission);
+                        Transmission transmission, User user, int numberOfDoors, TypeOfDrive typeOfDrive, int trunkCapacity) {
+        super(registrationNumber, brand, model, seats, airConditioning, transmission,user,TYPE_OF_CAR);
         this.numberOfDoors = numberOfDoors;
         this.typeOfDrive = typeOfDrive;
         this.trunkCapacity = trunkCapacity;
