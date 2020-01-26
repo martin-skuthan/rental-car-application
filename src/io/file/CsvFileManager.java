@@ -19,20 +19,20 @@ public class CsvFileManager implements FileManager {
         exportUsers(carRental);
     }
 
-    public CarRental importData() {
-        CarRental carRental = new CarRental();
-        importCars(carRental);
-        importUsers(carRental);
-        return carRental;
+    public FileCarRental importData() {
+        FileCarRental fileCarRental = new FileCarRental();
+        importCars(fileCarRental);
+        importUsers(fileCarRental);
+        return fileCarRental;
     }
 
     private void exportCars(CarRental carRental) {
-        Collection<Car> cars = carRental.getCars().values();
+        Collection<Car> cars = ((FileCarRental)carRental).getCars().values();
         exportCollection(cars, CARS_FILE_NAME);
     }
 
     private void exportUsers(CarRental carRental) {
-        Collection<CarRentalUser> users = carRental.getCarRentalUsers().values();
+        Collection<CarRentalUser> users = ((FileCarRental)carRental).getCarRentalUsers().values();
         exportCollection(users, USERS_FILE_NAME);
     }
 
@@ -99,12 +99,13 @@ public class CsvFileManager implements FileManager {
         int seats = Integer.valueOf(split[4]);
         boolean airConditioning = Boolean.valueOf(split[5]);
         Transmission transmission = Transmission.getFromDescription(split[6]);
+
         int numberOfDoors = Integer.valueOf(split[7]);
         TypeOfDrive typeOfDrive = TypeOfDrive.getFromDescription(split[8]);
         int trunkCapacity = Integer.valueOf(split[9]);
 
-        return new PassengerCar(registrationNumber, brand, model, seats, airConditioning, transmission, numberOfDoors,
-                                typeOfDrive, trunkCapacity);
+        return new PassengerCar(registrationNumber, brand, model, seats, airConditioning, transmission, null,
+                                numberOfDoors, typeOfDrive, trunkCapacity);
     }
 
     private LightCommercialCar createLightCommercialCar(String[] split) {
@@ -120,8 +121,8 @@ public class CsvFileManager implements FileManager {
         double loadWidth = Double.valueOf(split[10]);
         double loadLength = Double.valueOf(split[11]);
 
-        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, payLoad,
-                                      loadVolume, loadHeight, loadWidth, loadLength);
+        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, null,
+                                      payLoad, loadVolume, loadHeight, loadWidth, loadLength);
     }
 
     private CarRentalUser createCarRentalUser(String line) {

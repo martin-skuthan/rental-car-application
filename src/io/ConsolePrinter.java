@@ -1,9 +1,6 @@
 package io;
 
-import model.Car;
-import model.CarRentalUser;
-import model.LightCommercialCar;
-import model.PassengerCar;
+import model.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -41,9 +38,9 @@ public class ConsolePrinter {
         }
     }
 
-    public void printCarRentalUsers(Collection<CarRentalUser> carRentalUsers) {
+    public void printCarRentalUsers(Collection<User> carRentalUsers) {
         int counter = 0;
-        for (CarRentalUser user : carRentalUsers) {
+        for (User user : carRentalUsers) {
             System.out.println(user);
             counter++;
         }

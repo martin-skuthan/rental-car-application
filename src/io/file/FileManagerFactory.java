@@ -32,7 +32,7 @@ public class FileManagerFactory {
                 fileType = FileType.getFileTypeFromDescription(dataReader.getString());
                 optionOk = true;
             }catch (NoSuchTypeException ex) {
-                ex.getMessage();
+                System.out.println(ex.getMessage());
             }
         }
 

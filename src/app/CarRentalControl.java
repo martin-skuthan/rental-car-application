@@ -21,14 +21,17 @@ public class CarRentalControl {
     private FileManager fileManager;
 
     public CarRentalControl() {
-        fileManager = new FileManagerFactory(dataReader).buildFileManager();
-        try {
-            carRental = fileManager.importData();
-            System.out.println("Import from file succeeded");
-        }catch (ImportDataException ex) {
-            System.out.println(ex.getMessage());
-            carRental = new CarRental();
-            System.out.println("New Car Rental was created.");
+        carRental = new CarRentalFactory(dataReader).buildCarRental();
+        if (carRental instanceof FileCarRental) {
+            fileManager = new FileManagerFactory(dataReader).buildFileManager();
+            try {
+                carRental = fileManager.importData();
+                System.out.println("Import from file succeeded");
+            }catch (ImportDataException ex) {
+                System.out.println(ex.getMessage());
+                carRental = new FileCarRental();
+                System.out.println("New Car Rental was created.");
+            }
         }
     }
 
@@ -155,10 +158,17 @@ public class CarRentalControl {
         }
     }
 
+
     private void printUsers() {
-        Collection<CarRentalUser> carRentalUsers = carRental.getSortedCarRentalUsers(new UserIdComparator());
+        Collection<User> carRentalUsers = carRental.getSortedUsers(new UserIdComparator());
         consolePrinter.printCarRentalUsers(carRentalUsers);
     }
+
+    /*
+    private void rentCar() {
+        RentedCar
+    }
+    */
 
     private void close() {
         try {

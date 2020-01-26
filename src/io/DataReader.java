@@ -3,9 +3,13 @@ package io;
 import model.CarRentalUser;
 import model.LightCommercialCar;
 import model.PassengerCar;
+import model.RentedCar;
 import model.enums.Transmission;
 import model.enums.TypeOfDrive;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class DataReader {
@@ -61,8 +65,8 @@ public class DataReader {
         System.out.println("Trunk capacity(in suitcases): ");
         int trunkCapacity = getInt();
 
-        return new PassengerCar(registrationNumber,brand, model, seats, airConditioning, transmission, numberOfDoors,
-                                typeOfDrive, trunkCapacity);
+        return new PassengerCar(registrationNumber,brand, model, seats, airConditioning, transmission, null,
+                                numberOfDoors, typeOfDrive, trunkCapacity);
     }
 
     public LightCommercialCar readAndCreateLightCommercialCar() {
@@ -90,8 +94,8 @@ public class DataReader {
         System.out.println("Load length(m): ");
         double loadLegth = scanner.nextDouble();
 
-        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission , payload,
-                                      loadVolume, loadHeight, loadWidth, loadLegth);
+        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, null,
+                                      payload, loadVolume, loadHeight, loadWidth, loadLegth);
     }
 
     public CarRentalUser readAndCreateCarRentalUser() {
@@ -103,6 +107,19 @@ public class DataReader {
         String pesel = scanner.nextLine();
 
         return new CarRentalUser(firstName, lastName, pesel);
+    }
+
+    public RentedCar readAndCreateRenterCar() {
+        System.out.println("Car Id: ");
+        String carId = scanner.nextLine();
+        System.out.println("User Id: ");
+        String userID = scanner.nextLine();
+        System.out.println("Date of returning (dd-MM-yyyy): ");
+        DateTimeFormatter dataPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateInput = scanner.nextLine();
+        LocalDate dateOfReturn = LocalDate.parse(dateInput, dataPattern);
+
+        return new RentedCar(carId, userID, LocalDate.now(), dateOfReturn);
     }
 
 }

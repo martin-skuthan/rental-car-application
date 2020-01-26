@@ -2,12 +2,10 @@ package io.file;
 
 import exceptions.ExportDataException;
 import exceptions.ImportDataException;
-import model.Car;
 import model.CarRental;
+import model.FileCarRental;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.Map;
 
 public class SerializableFileManager implements FileManager {
     private static final String FILE_NAME = "CarRental.obj";
@@ -23,12 +21,12 @@ public class SerializableFileManager implements FileManager {
         }
     }
 
-    public CarRental importData() {
+    public FileCarRental importData() {
         try(
                 FileInputStream fileInputStream = new FileInputStream(FILE_NAME);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 ) {
-            return (CarRental) objectInputStream.readObject();
+            return (FileCarRental) objectInputStream.readObject();
         }catch (IOException | ClassNotFoundException ex) {
             throw new ImportDataException("Problem with import data from: " + FILE_NAME);
         }

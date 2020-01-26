@@ -11,7 +11,8 @@ public enum Options {
     PRINT_LIGHT_COMMERCIAL_CARS("Print light commercial cars"),
     ADD_USER("Add user"),
     REMOVE_USER("Remove user"),
-    PRINT_USERS("Print users");
+    PRINT_USERS("Print users"),
+    RENT_CAR("Rent car");
 
     String description;
 

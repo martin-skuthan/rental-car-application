@@ -13,6 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MySqlCarDao implements CarDao {
     private static final String CREATE = "INSERT INTO cars(RegistrationNumber,Brand,Model,Seats,AirConditioning,\n" +
@@ -20,6 +23,7 @@ public class MySqlCarDao implements CarDao {
                                          "LoadHeight,LoadWidth,LoadLength,TypeOfCar,UserID)\n" +
                                          "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String READ = "SELECT * FROM cars where RegistrationNumber=?;";
+    private static final String READ_ALL_ROWS = "SELECT * FROM cars;";
     private static final String UPDATE = "UPDATE cars SET RegistrationNumber=?,Brand=?,Model=?,Seats=?,AirConditioning=?" +
                                          "Transmission=?,NumberOfDoors=?,TypeOfDrive=?,TrunkCapacity=?,Payload=?,LoadVolume=?" +
                                          "LoadHeight=?,LoadWidth=?,LoadLength=?,TypOfCar=?,UserID=? WHERE RegistrationNumber=?;";
@@ -62,6 +66,30 @@ public class MySqlCarDao implements CarDao {
             throw new DbOperationException(ex.getMessage());
         }
         return car;
+    }
+
+    @Override
+    public Collection<Car> readAll() {
+        ArrayList<Car> cars = new ArrayList<>();
+        try(Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL_ROWS);
+                ){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String typeOfCar = resultSet.getString("TypeOfCar");
+                Car car = null;
+                if (typeOfCar.equals(PassengerCar.TYPE_OF_CAR)) {
+                    car = readPassengerCar(resultSet);
+                }else if (typeOfCar.equals(LightCommercialCar.TYPE_OF_CAR)) {
+                    car = readLightCommercialCar(resultSet);
+                }
+                cars.add(car);
+            }
+        }catch (SQLException | ClassNotFoundException ex) {
+            throw new DbOperationException(ex.getMessage());
+        }
+
+        return cars;
     }
 
     @Override
