@@ -77,7 +77,7 @@ public class FileCarRental implements CarRental {
 
     @Override
     public boolean removeCarRentalUser(String pesel) {
-        if (cars.containsKey(pesel)) {
+        if (carRentalUsers.containsKey(pesel)) {
             carRentalUsers.remove(pesel);
             return true;
         }else {

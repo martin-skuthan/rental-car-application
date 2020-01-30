@@ -17,7 +17,7 @@ import java.util.InputMismatchException;
 public class CarRentalControl {
     private CarRental carRental;
     private DataReader dataReader = new DataReader();
-    private ConsolePrinter consolePrinter = new ConsolePrinter();
+    private ConsolePrinter consolePrinter = new ConsolePrinter(dataReader);
     private FileManager fileManager;
 
     public CarRentalControl() {
@@ -154,7 +154,7 @@ public class CarRentalControl {
         if (carRental.removeCarRentalUser(pesel)) {
             System.out.println("User with pesel: " + pesel + " was removed");
         }else {
-            System.out.println("There is no user with User ID: " + pesel);
+            System.out.println("There is no user with pesel: " + pesel);
         }
     }
 

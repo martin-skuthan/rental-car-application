@@ -60,10 +60,14 @@ public class PassengerCar extends Car {
 
     @Override
     public String toString() {
-        return  super.toString() + ", number of doors:" +
-                numberOfDoors + ", type of drive:" +
-                typeOfDrive + ", trunk capacity(in bages):" +
-                trunkCapacity;
+        String description = super.toString() + ", number of doors:" +
+                             numberOfDoors + ", type of drive:" +
+                             typeOfDrive + ", trunk capacity(in bages):" +
+                             trunkCapacity;
+        if (getUser() != null) {
+            description += "Rented by:" + getUser() + "\n";
+        }
+        return description;
     }
 
     @Override

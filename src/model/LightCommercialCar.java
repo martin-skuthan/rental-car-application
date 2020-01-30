@@ -82,12 +82,16 @@ public class LightCommercialCar extends Car {
 
     @Override
     public String toString() {
-        return  super.toString() + ", payload(kg):" +
-                payload + ", load volume(m3):" +
-                loadVolume + ", load height(m):" +
-                loadHeight + ", load width(m):" +
-                loadWidth + ", load length(m):" +
-                loadLength;
+        String description = super.toString() + ", payload(kg):" +
+                             payload + ", load volume(m3):" +
+                             loadVolume + ", load height(m):" +
+                             loadHeight + ", load width(m):" +
+                             loadWidth + ", load length(m):" +
+                             loadLength + "\n";
+        if (getUser() != null) {
+            description += "Rented by:" + getUser() + "\n";
+        }
+        return description;
     }
 
     @Override
