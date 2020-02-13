@@ -66,18 +66,23 @@ public class LightCommercialCar extends Car {
 
     @Override
     public String convertToCsv() {
-        return  TYPE_OF_CAR + ";" +
-                getRegistrationNumber() + ";" +
-                getBrand() + ";" +
-                getModel() + ";" +
-                getSeats() + ";" +
-                isAirConditioning() + ";" +
-                getTransmission() + ";" +
-                getPayload() + ";" +
-                getLoadVolume() + ";" +
-                getLoadHeight() + ";" +
-                getLoadWidth() + ";" +
-                getLoadLength();
+        String description = TYPE_OF_CAR + ";" +
+                             getRegistrationNumber() + ";" +
+                             getBrand() + ";" +
+                             getModel() + ";" +
+                             getSeats() + ";" +
+                             isAirConditioning() + ";" +
+                             getTransmission() + ";" +
+                             getPayload() + ";" +
+                             getLoadVolume() + ";" +
+                             getLoadHeight() + ";" +
+                             getLoadWidth() + ";" +
+                             getLoadLength();
+        if (getUser() != null) {
+            description += getUser().convertToCsv();
+        }
+
+        return description;
     }
 
     @Override
@@ -87,7 +92,7 @@ public class LightCommercialCar extends Car {
                              loadVolume + ", load height(m):" +
                              loadHeight + ", load width(m):" +
                              loadWidth + ", load length(m):" +
-                             loadLength + "\n";
+                             loadLength;
         if (getUser() != null) {
             description += "Rented by:" + getUser() + "\n";
         }

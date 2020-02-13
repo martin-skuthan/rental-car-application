@@ -1,5 +1,6 @@
 package io.file;
 
+import com.sun.jdi.request.StepRequest;
 import exceptions.ExportDataException;
 import exceptions.ImportDataException;
 import exceptions.InvalidDataException;
@@ -93,6 +94,7 @@ public class CsvFileManager implements FileManager {
     }
 
     private PassengerCar createPassengerCar(String[] split) {
+        final int splitSizeWithoutUser = 10;
         String registrationNumber = split[1];
         String brand = split[2];
         String model = split[3];
@@ -103,12 +105,20 @@ public class CsvFileManager implements FileManager {
         int numberOfDoors = Integer.valueOf(split[7]);
         TypeOfDrive typeOfDrive = TypeOfDrive.getFromDescription(split[8]);
         int trunkCapacity = Integer.valueOf(split[9]);
+        User user = null;
+        if (split.length > splitSizeWithoutUser) {
+            String firstName = split[10];
+            String lastName = split[11];
+            String pesel = split[12];
+            user = new CarRentalUser(firstName, lastName, pesel);
+        }
 
-        return new PassengerCar(registrationNumber, brand, model, seats, airConditioning, transmission, null,
+        return new PassengerCar(registrationNumber, brand, model, seats, airConditioning, transmission, user,
                                 numberOfDoors, typeOfDrive, trunkCapacity);
     }
 
     private LightCommercialCar createLightCommercialCar(String[] split) {
+        final int splitSizeWithoutUser = 12;
         String registrationNumber = split[1];
         String brand = split[2];
         String model = split[3];
@@ -120,19 +130,25 @@ public class CsvFileManager implements FileManager {
         double loadHeight = Double.valueOf(split[9]);
         double loadWidth = Double.valueOf(split[10]);
         double loadLength = Double.valueOf(split[11]);
+        User user = null;
+        if (split.length > splitSizeWithoutUser) {
+            String firstName = split[12];
+            String lastName = split[13];
+            String pesel = split[14];
+            user = new CarRentalUser(firstName, lastName, pesel);
+        }
 
-        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, null,
+        return new LightCommercialCar(registrationNumber, brand, model, seats, airConditioning, transmission, user,
                                       payLoad, loadVolume, loadHeight, loadWidth, loadLength);
     }
 
     private CarRentalUser createCarRentalUser(String line) {
         String[] spltit = line.split(";");
-        String userId = spltit[0];
-        String firstName = spltit[1];
-        String lastName = spltit[2];
-        String pesel = spltit[3];
+        String firstName = spltit[0];
+        String lastName = spltit[1];
+        String pesel = spltit[2];
 
-        return new CarRentalUser(userId, firstName, lastName, pesel);
+        return new CarRentalUser(firstName, lastName, pesel);
     }
 
 

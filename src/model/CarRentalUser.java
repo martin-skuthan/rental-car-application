@@ -6,8 +6,4 @@ public class CarRentalUser extends User {
         super(firstName, lastName, pesel);
     }
 
-    public CarRentalUser(String userId, String firstName, String lastName, String pesel) {
-        super(userId, firstName, lastName, pesel);
-    }
-
 }

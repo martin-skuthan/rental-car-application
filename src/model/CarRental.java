@@ -17,4 +17,5 @@ public interface CarRental {
 
     public Collection<User> getSortedUsers(Comparator<User> comparator);
 
+    public void rentCar(String registrationNumber, String pesel);
 }

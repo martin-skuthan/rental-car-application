@@ -1,7 +1,9 @@
 package model;
 
 import exceptions.CarAlreadyExistsException;
+import exceptions.CarNotFoundException;
 import exceptions.UserAlreadyExistsException;
+import exceptions.UserNotFoundException;
 import io.database.dao.MySqlCarDao;
 import io.database.dao.MySqlUserDao;
 
@@ -80,6 +82,22 @@ public class DataBaseCarRental implements CarRental {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public void rentCar(String registrationNumber, String pesel) {
+        Car carFound = mySqlCarDao.read(registrationNumber);
+        User userFound = mySqlUserDao.read(pesel);
+        if (carFound == null) {
+            throw new CarNotFoundException("Car with this registration number not found");
+        }
+
+        if (userFound == null) {
+            throw new UserNotFoundException("User with this pesel not found");
+        }
+
+        carFound.setUser(userFound);
+        mySqlCarDao.update(carFound);
     }
 
 }

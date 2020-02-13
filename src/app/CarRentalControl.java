@@ -3,13 +3,12 @@ package app;
 import exceptions.*;
 import io.ConsolePrinter;
 import io.DataReader;
-import io.file.CsvFileManager;
+import io.enums.PrintFilter;
 import io.file.FileManager;
 import io.file.FileManagerFactory;
-import io.file.SerializableFileManager;
 import model.*;
 import model.comparator.BrandComparator;
-import model.comparator.UserIdComparator;
+import model.comparator.UserNameComparator;
 
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -78,6 +77,9 @@ public class CarRentalControl {
                 break;
             case PRINT_USERS:
                 printUsers();
+                break;
+            case RENT_CAR:
+                rentCar();
                 break;
         }
     }
@@ -160,15 +162,29 @@ public class CarRentalControl {
 
 
     private void printUsers() {
-        Collection<User> carRentalUsers = carRental.getSortedUsers(new UserIdComparator());
+        Collection<User> carRentalUsers = carRental.getSortedUsers(new UserNameComparator());
         consolePrinter.printCarRentalUsers(carRentalUsers);
     }
 
-    /*
+
     private void rentCar() {
-        RentedCar
+        Collection<Car> cars = carRental.getSortedCars(new BrandComparator());
+        consolePrinter.printPassengerCars(cars, PrintFilter.AVAILABLE);
+        System.out.println();
+        consolePrinter.printLightCommercialCars(cars, PrintFilter.AVAILABLE);
+        System.out.println("Enter registration number of renting car:");
+        String registrationNumber = dataReader.getString();
+        System.out.println();
+        printUsers();
+        System.out.println("Enter user's pesel:");
+        String pesel = dataReader.getString();
+        try {
+            carRental.rentCar(registrationNumber, pesel);
+            System.out.println("Car has been rented");
+        }catch (CarNotFoundException | UserNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-    */
 
     private void close() {
         try {

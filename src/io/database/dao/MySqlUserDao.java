@@ -42,11 +42,10 @@ public class MySqlUserDao implements UserDao {
             preparedStatement.setString(1, pesel);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String userId = String.valueOf(resultSet.getInt("ID"));
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String userPesel = resultSet.getString("Pesel");
-                user = new CarRentalUser(userId, firstName, lastName, userPesel);
+                user = new CarRentalUser(firstName, lastName, userPesel);
             }
         }catch (SQLException | ClassNotFoundException ex) {
             throw new DbOperationException(ex.getMessage());
@@ -62,11 +61,10 @@ public class MySqlUserDao implements UserDao {
                 ){
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String userId = String.valueOf(resultSet.getInt("ID"));
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String pesel = resultSet.getString("Pesel");
-                users.add(new CarRentalUser(userId, firstName, lastName, pesel));
+                users.add(new CarRentalUser(firstName, lastName, pesel));
             }
         }catch (SQLException | ClassNotFoundException ex) {
             throw new DbOperationException(ex.getMessage());

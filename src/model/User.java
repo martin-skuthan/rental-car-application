@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class User implements Serializable, CsvConvert {
-    private String userId;
     private String firstName;
     private String lastName;
     private String pesel;
@@ -15,20 +14,8 @@ public abstract class User implements Serializable, CsvConvert {
         this.pesel = pesel;
     }
 
-    public User(String userId, String firstName, String lastName, String pesel) {
-        this(firstName, lastName, pesel);
-        this.userId = userId;
-    }
 
     public User(){}
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -56,13 +43,12 @@ public abstract class User implements Serializable, CsvConvert {
 
     @Override
     public String toString() {
-        return "User ID:" + userId + ", " + firstName + " " + lastName + ", pesel:" + pesel;
+        return firstName + " " + lastName + ", pesel:" + pesel;
     }
 
     @Override
     public String convertToCsv() {
-        return  userId + ";" +
-                firstName + ";" +
+        return  firstName + ";" +
                 lastName + ";" +
                 pesel;
     }
@@ -72,8 +58,7 @@ public abstract class User implements Serializable, CsvConvert {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
-                Objects.equals(firstName, user.firstName) &&
+        return Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(pesel, user.pesel);
     }
@@ -81,6 +66,6 @@ public abstract class User implements Serializable, CsvConvert {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, firstName, lastName, pesel);
+        return Objects.hash(firstName, lastName, pesel);
     }
 }

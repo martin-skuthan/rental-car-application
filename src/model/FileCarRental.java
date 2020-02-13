@@ -1,11 +1,14 @@
 package model;
 
 import exceptions.CarAlreadyExistsException;
+import exceptions.CarNotFoundException;
 import exceptions.UserAlreadyExistsException;
+import exceptions.UserNotFoundException;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FileCarRental implements CarRental {
+public class FileCarRental implements CarRental, Serializable {
     private Map<String, Car> cars = new HashMap<>();
     private Map<String, CarRentalUser> carRentalUsers = new HashMap<>();
 
@@ -85,4 +88,18 @@ public class FileCarRental implements CarRental {
         }
     }
 
+    @Override
+    public void rentCar(String registrationNumber, String pesel) {
+        if (!cars.containsKey(registrationNumber)) {
+            throw new CarNotFoundException("Car with this registration number not found");
+        }
+
+        if (!carRentalUsers.containsKey(pesel)) {
+            throw new UserNotFoundException("User with this pesel not found");
+        }
+
+        Car carFound = cars.get(registrationNumber);
+        User userFound = carRentalUsers.get(pesel);
+        carFound.setUser(userFound);
+    }
 }

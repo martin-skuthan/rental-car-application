@@ -46,16 +46,21 @@ public class PassengerCar extends Car {
 
     @Override
     public String convertToCsv() {
-        return  TYPE_OF_CAR + ";" +
-                getRegistrationNumber() + ";" +
-                getBrand() + ";" +
-                getModel() + ";" +
-                getSeats() + ";" +
-                isAirConditioning() + ";" +
-                getTransmission() + ";" +
-                getNumberOfDoors() + ";" +
-                getTypeOfDrive() + ";" +
-                trunkCapacity;
+        String description = TYPE_OF_CAR + ";" +
+                             getRegistrationNumber() + ";" +
+                             getBrand() + ";" +
+                             getModel() + ";" +
+                             getSeats() + ";" +
+                             isAirConditioning() + ";" +
+                             getTransmission() + ";" +
+                             getNumberOfDoors() + ";" +
+                             getTypeOfDrive() + ";" +
+                             trunkCapacity + ";";
+        if (getUser() != null) {
+            description += getUser().convertToCsv();
+        }
+
+        return description;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class PassengerCar extends Car {
                              typeOfDrive + ", trunk capacity(in bages):" +
                              trunkCapacity;
         if (getUser() != null) {
-            description += "Rented by:" + getUser() + "\n";
+            description += "\n" + "-Rented by:" + getUser();
         }
         return description;
     }

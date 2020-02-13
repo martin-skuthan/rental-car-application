@@ -20,13 +20,13 @@ import java.util.List;
 public class MySqlCarDao implements CarDao {
     private static final String CREATE = "INSERT INTO cars(RegistrationNumber,Brand,Model,Seats,AirConditioning,\n" +
                                          "Transmission,NumberOfDoors,TypeOfDrive,TrunkCapacity,Payload,LoadVolume,\n" +
-                                         "LoadHeight,LoadWidth,LoadLength,TypeOfCar,UserID)\n" +
+                                         "LoadHeight,LoadWidth,LoadLength,TypeOfCar,UserPesel)\n" +
                                          "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String READ = "SELECT * FROM cars where RegistrationNumber=?;";
     private static final String READ_ALL_ROWS = "SELECT * FROM cars;";
-    private static final String UPDATE = "UPDATE cars SET RegistrationNumber=?,Brand=?,Model=?,Seats=?,AirConditioning=?" +
-                                         "Transmission=?,NumberOfDoors=?,TypeOfDrive=?,TrunkCapacity=?,Payload=?,LoadVolume=?" +
-                                         "LoadHeight=?,LoadWidth=?,LoadLength=?,TypOfCar=?,UserID=? WHERE RegistrationNumber=?;";
+    private static final String UPDATE = "UPDATE cars SET RegistrationNumber=?,Brand=?,Model=?,Seats=?,AirConditioning=?," +
+                                         "Transmission=?,NumberOfDoors=?,TypeOfDrive=?,TrunkCapacity=?,Payload=?,LoadVolume=?," +
+                                         "LoadHeight=?,LoadWidth=?,LoadLength=?,TypeOfCar=?,UserPesel=? WHERE RegistrationNumber=?;";
     private static final String DELETE = "DELETE FROM cars WHERE RegistrationNumber=?;";
 
 
@@ -137,7 +137,12 @@ public class MySqlCarDao implements CarDao {
         preparedStatement.setString(13, null);
         preparedStatement.setString(14, null);
         preparedStatement.setString(15, car.getTypeOfCar());
-        preparedStatement.setString(16, null);
+        if (car.getUser() != null) {
+            preparedStatement.setString(16, car.getUser().getPesel());
+        }else {
+            preparedStatement.setString(16, null);
+        }
+
     }
 
     private void createLightCommercialCar(PreparedStatement preparedStatement, Car car) throws SQLException {
@@ -156,7 +161,11 @@ public class MySqlCarDao implements CarDao {
         preparedStatement.setDouble(13,((LightCommercialCar)car).getLoadWidth());
         preparedStatement.setDouble(14,((LightCommercialCar)car).getLoadWidth());
         preparedStatement.setString(15, car.getTypeOfCar());
-        preparedStatement.setString(16, null);
+        if (car.getUser() != null) {
+            preparedStatement.setString(16, car.getUser().getPesel());
+        }else {
+            preparedStatement.setString(16, null);
+        }
     }
 
     private PassengerCar readPassengerCar(ResultSet resultSet) throws SQLException {
@@ -167,7 +176,12 @@ public class MySqlCarDao implements CarDao {
         boolean airConditioning = resultSet.getBoolean("AirConditioning");
         String transmissionDesc = resultSet.getString("Transmission");
         Transmission transmission = Transmission.getFromDescription(transmissionDesc);
+        String userPesel = resultSet.getString("UserPesel");
         User user = null;
+        if (userPesel != null) {
+            MySqlUserDao mySqlUserDao = new MySqlUserDao();
+            user = mySqlUserDao.read(userPesel);
+        }
         int numberOfDoors = resultSet.getInt("NumberOfDoors");
         String typeOfDriveDesc = resultSet.getString("TypeOfDrive");
         TypeOfDrive typeOfDrive = TypeOfDrive.getFromDescription(typeOfDriveDesc);
@@ -185,7 +199,12 @@ public class MySqlCarDao implements CarDao {
         boolean airConditioning = resultSet.getBoolean("AirConditioning");
         String transmissionDesc = resultSet.getString("Transmission");
         Transmission transmission = Transmission.getFromDescription(transmissionDesc);
+        String userPesel = resultSet.getString("UserPesel");
         User user = null;
+        if (userPesel != null) {
+            MySqlUserDao mySqlUserDao = new MySqlUserDao();
+            user = mySqlUserDao.read(userPesel);
+        }
         double payload = resultSet.getDouble("Payload");
         double loadVolume = resultSet.getDouble("LoadVolume");
         double loadHeight = resultSet.getDouble("LoadHeight");
