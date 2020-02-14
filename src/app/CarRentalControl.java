@@ -81,6 +81,9 @@ public class CarRentalControl {
             case RENT_CAR:
                 rentCar();
                 break;
+            case RETURN_CAR:
+                returnCar();
+                break;
         }
     }
 
@@ -166,18 +169,13 @@ public class CarRentalControl {
         consolePrinter.printCarRentalUsers(carRentalUsers);
     }
 
-
     private void rentCar() {
         Collection<Car> cars = carRental.getSortedCars(new BrandComparator());
-        consolePrinter.printPassengerCars(cars, PrintFilter.AVAILABLE);
-        System.out.println();
-        consolePrinter.printLightCommercialCars(cars, PrintFilter.AVAILABLE);
-        System.out.println("Enter registration number of renting car:");
-        String registrationNumber = dataReader.getString();
+        consolePrinter.printAllTypesOfCars(cars, PrintFilter.AVAILABLE);
+        String registrationNumber = dataReader.getCarRegistrationNuber();
         System.out.println();
         printUsers();
-        System.out.println("Enter user's pesel:");
-        String pesel = dataReader.getString();
+        String pesel = dataReader.getUserPesel();
         try {
             carRental.rentCar(registrationNumber, pesel);
             System.out.println("Car has been rented");
@@ -186,12 +184,26 @@ public class CarRentalControl {
         }
     }
 
-    private void close() {
+    private void returnCar() {
+        Collection<Car> cars = carRental.getSortedCars(new BrandComparator());
+        consolePrinter.printAllTypesOfCars(cars, PrintFilter.RENTED);
+        String registrationNumber = dataReader.getCarRegistrationNuber();
         try {
-            fileManager.exportData(carRental);
-            System.out.println("Export to file succeeded");
-        }catch (ExportDataException ex) {
+            carRental.returnCar(registrationNumber);
+            System.out.println("Car has been returned");
+        }catch (CarNotFoundException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    private void close() {
+        if (carRental instanceof FileCarRental) {
+            try {
+                fileManager.exportData(carRental);
+                System.out.println("Export to file succeeded");
+            }catch (ExportDataException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }

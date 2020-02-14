@@ -100,4 +100,15 @@ public class DataBaseCarRental implements CarRental {
         mySqlCarDao.update(carFound);
     }
 
+    @Override
+    public void returnCar(String registrationNumber) {
+        Car carFound = mySqlCarDao.read(registrationNumber);
+        if (carFound == null) {
+            throw new CarNotFoundException("Car with this registration number not found");
+        }
+
+        carFound.setUser(null);
+        mySqlCarDao.update(carFound);
+    }
+
 }

@@ -3,13 +3,8 @@ package io;
 import model.CarRentalUser;
 import model.LightCommercialCar;
 import model.PassengerCar;
-import model.RentedCar;
 import model.enums.Transmission;
 import model.enums.TypeOfDrive;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class DataReader {
@@ -37,6 +32,16 @@ public class DataReader {
         }finally {
             scanner.nextLine();
         }
+    }
+
+    public String getCarRegistrationNuber() {
+        System.out.println("Enter registration number:");
+        return getString();
+    }
+
+    public String getUserPesel() {
+        System.out.println("Enter pesel:");
+        return getString();
     }
 
     public void close() {
@@ -108,18 +113,4 @@ public class DataReader {
 
         return new CarRentalUser(firstName, lastName, pesel);
     }
-
-    public RentedCar readAndCreateRenterCar() {
-        System.out.println("Car Id: ");
-        String carId = scanner.nextLine();
-        System.out.println("User Id: ");
-        String userID = scanner.nextLine();
-        System.out.println("Date of returning (dd-MM-yyyy): ");
-        DateTimeFormatter dataPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String dateInput = scanner.nextLine();
-        LocalDate dateOfReturn = LocalDate.parse(dateInput, dataPattern);
-
-        return new RentedCar(carId, userID, LocalDate.now(), dateOfReturn);
-    }
-
 }

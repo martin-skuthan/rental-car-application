@@ -12,7 +12,8 @@ public enum Options {
     ADD_USER("Add user"),
     REMOVE_USER("Remove user"),
     PRINT_USERS("Print users"),
-    RENT_CAR("Rent car");
+    RENT_CAR("Rent car"),
+    RETURN_CAR("Return car");
 
     String description;
 

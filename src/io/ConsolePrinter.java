@@ -64,7 +64,7 @@ public class ConsolePrinter {
                 System.out.println("Rented light commercial cars:");
                 streamSupplier.get().filter(car -> car.getUser() != null && car instanceof LightCommercialCar).
                         forEach(System.out::println);
-                if (streamSupplier.get().noneMatch(car -> car.getUser() == null && car instanceof LightCommercialCar)) {
+                if (streamSupplier.get().noneMatch(car -> car.getUser() != null && car instanceof LightCommercialCar)) {
                     System.out.println("There is no rented light commercial cars in car rental");
                 }
                 break;
@@ -80,6 +80,12 @@ public class ConsolePrinter {
 
     public void  printLightCommercialCars(Collection<Car> cars) {
         PrintFilter printFilter = getPrintFilter();
+        printLightCommercialCars(cars, printFilter);
+    }
+
+    public void printAllTypesOfCars(Collection<Car> cars, PrintFilter printFilter) {
+        printPassengerCars(cars, printFilter);
+        System.out.println();
         printLightCommercialCars(cars, printFilter);
     }
 

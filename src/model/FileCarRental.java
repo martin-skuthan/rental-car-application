@@ -102,4 +102,14 @@ public class FileCarRental implements CarRental, Serializable {
         User userFound = carRentalUsers.get(pesel);
         carFound.setUser(userFound);
     }
+
+    @Override
+    public void returnCar(String registrationNumber) {
+        if (!cars.containsKey(registrationNumber)) {
+            throw new CarNotFoundException("Car with this registration number not found");
+        }
+
+        Car carFound = cars.get(registrationNumber);
+        carFound.setUser(null);
+    }
 }
