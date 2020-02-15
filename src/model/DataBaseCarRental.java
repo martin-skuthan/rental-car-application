@@ -4,9 +4,11 @@ import exceptions.CarAlreadyExistsException;
 import exceptions.CarNotFoundException;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
+import io.database.ConnectionProvider;
 import io.database.dao.MySqlCarDao;
 import io.database.dao.MySqlUserDao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -15,7 +17,8 @@ public class DataBaseCarRental implements CarRental {
     private MySqlCarDao mySqlCarDao;
     private MySqlUserDao mySqlUserDao;
 
-    public DataBaseCarRental() {
+    public DataBaseCarRental() throws SQLException, ClassNotFoundException{
+        checkConnectionToDatabase();
         mySqlCarDao = new MySqlCarDao();
         mySqlUserDao = new MySqlUserDao();
     }
@@ -109,6 +112,10 @@ public class DataBaseCarRental implements CarRental {
 
         carFound.setUser(null);
         mySqlCarDao.update(carFound);
+    }
+
+    private void checkConnectionToDatabase() throws ClassNotFoundException, SQLException{
+        ConnectionProvider.getConnection();
     }
 
 }

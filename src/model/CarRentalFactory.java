@@ -4,6 +4,8 @@ import exceptions.NoSuchTypeException;
 import io.DataReader;
 import model.enums.CarRentalType;
 
+import java.sql.SQLException;
+
 public class CarRentalFactory {
     private DataReader dataReader;
 
@@ -17,7 +19,12 @@ public class CarRentalFactory {
             case FILE:
                 return new FileCarRental();
             case DATABASE:
-                return new DataBaseCarRental();
+                try {
+                    return new DataBaseCarRental();
+                }catch (SQLException | ClassNotFoundException ex) {
+                    System.out.println("Connection to database failed, file read and write method has been chosen");
+                    return new FileCarRental();
+                }
             default:
                 return null;
         }
