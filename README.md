@@ -3,7 +3,7 @@ Car rental management system written in Java language.
 
 ## Table of contents
 * [General info](#general-info)
-* [Instalation](#screenshots)
+* [Installation](#installation)
 * [Features](#features)
 * [Contact](#contact)
 
