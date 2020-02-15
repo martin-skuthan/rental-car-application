@@ -1,0 +1,34 @@
+DROP DATABASE IF EXISTS carrental;
+CREATE DATABASE carrental;
+USE carrental;
+
+DROP TABLE IF EXISTS cars,users;
+
+CREATE TABLE cars(
+RegistrationNumber VARCHAR(10) NOT NULL PRIMARY KEY,
+Brand VARCHAR(45) NOT NULL,
+Model VARCHAR(45) NOT NULL,
+Seats INT(11) NOT NULL,
+AirConditioning TINYINT(1) NOT NULL,
+Transmission VARCHAR(45) NOT NULL,
+NumberOfDoors INT(11),
+TypeOfDrive VARCHAR(45),
+TrunkCapacity INT(11),
+Payload DOUBLE,
+LoadVolume DOUBLE,
+LoadHeight DOUBLE,
+LoadWidth DOUBLE,
+LoadLength DOUBLE,
+TypeOfCar VARCHAR(45),
+UserPesel VARCHAR(11)
+);
+
+CREATE TABLE users(
+FirstName VARCHAR(45) NOT NULL,
+LastName VARCHAR(45) NOT NULL,
+Pesel VARCHAR(11) NOT NULL PRIMARY KEY
+);
+
+ALTER TABLE cars
+ADD CONSTRAINT FK_UserPesel
+FOREIGN KEY (UserPesel) REFERENCES users(Pesel);
