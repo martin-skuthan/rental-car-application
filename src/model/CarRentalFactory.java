@@ -9,6 +9,14 @@ import java.sql.SQLException;
 public class CarRentalFactory {
     private DataReader dataReader;
 
+    public DataReader getDataReader() {
+        return dataReader;
+    }
+
+    public void setDataReader(DataReader dataReader) {
+        this.dataReader = dataReader;
+    }
+
     public CarRentalFactory(DataReader dataReader) {
         this.dataReader = dataReader;
     }

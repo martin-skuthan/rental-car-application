@@ -20,6 +20,8 @@ public class PassengerCar extends Car {
         this.trunkCapacity = trunkCapacity;
     }
 
+    public PassengerCar(){}
+
     public int getNumberOfDoors() {
         return numberOfDoors;
     }

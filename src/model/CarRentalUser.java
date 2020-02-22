@@ -6,4 +6,5 @@ public class CarRentalUser extends User {
         super(firstName, lastName, pesel);
     }
 
+    public CarRentalUser(){}
 }

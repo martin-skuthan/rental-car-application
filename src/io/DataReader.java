@@ -10,6 +10,14 @@ import java.util.Scanner;
 public class DataReader {
     private Scanner scanner = new Scanner(System.in);
 
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     public void nextLine() {
         scanner.nextLine();
     }

@@ -40,7 +40,7 @@ public class DataBaseCarRental implements CarRental {
     @Override
     public void addCar(Car car) {
         if (car.getRegistrationNumber() == null) {
-            throw new NullPointerException("Regisration number cannot be null");
+            throw new NullPointerException("Registration number cannot be null");
         }
 
         Car foundCar = mySqlCarDao.read(car.getRegistrationNumber());

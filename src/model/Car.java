@@ -28,6 +28,8 @@ public abstract class Car implements Serializable, CsvConvert{
         this.typeOfCar = typeOfCar;
     }
 
+    Car(){}
+
     public String getRegistrationNumber() {
         return registrationNumber;
     }

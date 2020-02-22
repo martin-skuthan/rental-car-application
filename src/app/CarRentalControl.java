@@ -8,7 +8,7 @@ import io.file.FileManager;
 import io.file.FileManagerFactory;
 import model.*;
 import model.comparator.BrandComparator;
-import model.comparator.UserNameComparator;
+import model.comparator.UserLastNameComparator;
 
 import java.util.Collection;
 import java.util.InputMismatchException;
@@ -165,7 +165,7 @@ public class CarRentalControl {
 
 
     private void printUsers() {
-        Collection<User> carRentalUsers = carRental.getSortedUsers(new UserNameComparator());
+        Collection<User> carRentalUsers = carRental.getSortedUsers(new UserLastNameComparator());
         consolePrinter.printCarRentalUsers(carRentalUsers);
     }
 

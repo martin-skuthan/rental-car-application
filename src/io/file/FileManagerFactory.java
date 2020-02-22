@@ -6,6 +6,14 @@ import io.DataReader;
 public class FileManagerFactory {
     private DataReader dataReader;
 
+    public DataReader getDataReader() {
+        return dataReader;
+    }
+
+    public void setDataReader(DataReader dataReader) {
+        this.dataReader = dataReader;
+    }
+
     public FileManagerFactory(DataReader dataReader) {
         this.dataReader = dataReader;
     }
